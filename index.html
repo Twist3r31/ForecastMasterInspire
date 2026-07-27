@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forecast Master — Tornado Target</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span>Forecast Master</span>
+        <span class="mode-badge">Tornado Target</span>
+      </div>
+      <div class="header-controls">
+        <button id="btn-new-day" class="btn primary">Generate Day</button>
+        <button id="btn-submit" class="btn success" disabled>Submit Forecast</button>
+        <button id="btn-reset" class="btn secondary" disabled>Reset Target</button>
+      </div>
+    </header>
+
+    <!-- Main layout -->
+    <main class="main">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>Status</h2>
+          <div id="status-text" class="status">Click <strong>Generate Day</strong> to begin</div>
+          <div id="month-hint" class="hint hidden"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Your Forecast</h2>
+          <div id="target-info" class="info-box">No target placed</div>
+          <div id="score-display" class="score-box hidden">
+            <div class="score-label">Round Score</div>
+            <div id="score-value" class="score-value">0</div>
+            <div id="distance-value" class="distance"></div>
+          </div>
+        </section>
+
+        <!-- NEW: Parameters / Analysis Layers -->
+        <section class="panel" id="parameters-panel">
+          <h2>Parameters</h2>
+          <div id="parameters-list" class="parameters-list">
+            <div class="param-empty">Generate a day to load analysis layers</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>How to Play</h2>
+          <ol class="howto">
+            <li>Click <strong>Generate Day</strong></li>
+            <li>Toggle analysis layers in the Parameters panel</li>
+            <li>Click the map to place your tornado target</li>
+            <li>Submit and see how close you were</li>
+          </ol>
+          <p class="note">Scoring is based on distance to the nearest actual tornado report (SPC-style). Max points within ~25 miles.</p>
+        </section>
+
+        <section class="panel stats-panel">
+          <h2>Session Stats</h2>
+          <div class="stat-row"><span>Games</span><span id="stat-games">0</span></div>
+          <div class="stat-row"><span>Total Score</span><span id="stat-total">0</span></div>
+          <div class="stat-row"><span>Best Distance</span><span id="stat-best">—</span></div>
+          <div class="stat-row"><span>Avg Miles</span><span id="stat-avg">—</span></div>
+        </section>
+      </aside>
+
+      <!-- Map -->
+      <div id="map" class="map"></div>
+    </main>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="modal hidden">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <h2 id="results-title">Results</h2>
+        <div id="results-date" class="results-date"></div>
+        <div id="results-score" class="results-score"></div>
+        <div id="results-distance" class="results-distance"></div>
+        <div id="results-reports" class="results-reports"></div>
+        <button id="btn-play-again" class="btn primary">Play Another Day</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="scenarios.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
